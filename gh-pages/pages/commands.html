@@ -1,0 +1,1167 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>1.7.0 docs</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
+  <link href='assets/style.css' type='text/css' rel='stylesheet' />
+  <link href='assets/github.css' type='text/css' rel='stylesheet' />
+  <link href='assets/split.css' type='text/css' rel='stylesheet' />
+</head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'>russian-roulette</h3>
+          <div class='mb1'><code>1.7.0</code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+
+
+                <li><a
+                  href='#about'
+                  class="">
+                  about
+
+                </a>
+
+                </li>
+
+
+                <li><a
+                  href='#ban'
+                  class="">
+                  ban
+
+                </a>
+
+                </li>
+
+
+                <li><a
+                  href='#coin'
+                  class="">
+                  coin
+
+                </a>
+
+                </li>
+
+
+                <li><a
+                  href='#eval'
+                  class="">
+                  eval
+
+                </a>
+
+                </li>
+
+
+                <li><a
+                  href='#forceplay'
+                  class="">
+                  forceplay
+
+                </a>
+
+                </li>
+
+
+                <li><a
+                  href='#help'
+                  class="">
+                  help
+
+                </a>
+
+                </li>
+
+
+                <li><a
+                  href='#invite'
+                  class="">
+                  invite
+
+                </a>
+
+                </li>
+
+
+                <li><a
+                  href='#kick'
+                  class="">
+                  kick
+
+                </a>
+
+                </li>
+
+
+                <li><a
+                  href='#pick'
+                  class="">
+                  pick
+
+                </a>
+
+                </li>
+
+
+                <li><a
+                  href='#play'
+                  class="">
+                  play
+
+                </a>
+
+                </li>
+
+
+                <li><a
+                  href='#prefix'
+                  class="">
+                  prefix
+
+                </a>
+
+                </li>
+
+
+                <li><a
+                  href='#restart'
+                  class="">
+                  restart
+
+                </a>
+
+                </li>
+
+
+                <li><a
+                  href='#secret'
+                  class="">
+                  secret
+
+                </a>
+
+                </li>
+
+
+                <li><a
+                  href='#stats'
+                  class="">
+                  stats
+
+                </a>
+
+                </li>
+
+
+                <li><a
+                  href='#suggest'
+                  class="">
+                  suggest
+
+                </a>
+
+                </li>
+
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='http://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+
+
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+
+  <div class='clearfix'>
+
+    <h3 class='fl m0' id='about'>
+      about
+    </h3>
+
+
+  </div>
+
+
+  <p>Gives some slight information on the bot, its creator, and other stuff as well.</p>
+
+
+  <div class='pre p1 fill-light mt0'>)about</div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>message</span> <code class='quiet'>(any)</code>
+
+          </div>
+
+        </div>
+
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>args</span> <code class='quiet'>(none)</code>
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+
+  <div class='clearfix'>
+
+    <h3 class='fl m0' id='ban'>
+      ban
+    </h3>
+
+
+  </div>
+
+
+  <p>Lets the user ban a guild member</p>
+
+
+  <div class='pre p1 fill-light mt0'>)ban [u] [r]</div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>u</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    Mention of a guild member
+
+          </div>
+
+        </div>
+
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>r</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>`This user was banned by ${message.author.username}; no reason was given for the ban.`</code>)</code>
+	    The reason for the ban
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+
+  <div class='clearfix'>
+
+    <h3 class='fl m0' id='coin'>
+      coin
+    </h3>
+
+
+  </div>
+
+
+  <p>Lets the user flip a coin - y'know, for fun.</p>
+
+
+  <div class='pre p1 fill-light mt0'>)coin [answer]</div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>answer</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The side you presume the coin will land on
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+
+  <div class='clearfix'>
+
+    <h3 class='fl m0' id='eval'>
+      eval
+    </h3>
+
+
+  </div>
+
+
+  <p>Lets you evaluate code remotely</p>
+
+
+  <div class='pre p1 fill-light mt0'>)eval [i]</a></div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>i</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The code to be evaluated
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        The output of the evaluated code
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+
+  <div class='clearfix'>
+
+    <h3 class='fl m0' id='forceplay'>
+      forceplay
+    </h3>
+
+
+  </div>
+
+
+  <p>Lets the user give a member a chance of being banned, just like the play command, just this doesn't auto-unban.</p>
+
+
+  <div class='pre p1 fill-light mt0'>)forceplay [u]</div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>u</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    Mention of a guild member
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+
+  <div class='clearfix'>
+
+    <h3 class='fl m0' id='help'>
+      help
+    </h3>
+
+
+  </div>
+
+
+  <p>Gives information on the commands of the bot.</p>
+
+
+  <div class='pre p1 fill-light mt0'>)help [args]</div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>args</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>null</code>)</code>
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+
+  <div class='clearfix'>
+
+    <h3 class='fl m0' id='invite'>
+      invite
+    </h3>
+
+
+  </div>
+
+
+  <p>Invite links for the bot and for the support server.</p>
+
+
+  <div class='pre p1 fill-light mt0'>)invite</div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>message</span> <code class='quiet'>(any)</code>
+
+          </div>
+
+        </div>
+
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>args</span> <code class='quiet'>(any)</code>
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+
+  <div class='clearfix'>
+
+    <h3 class='fl m0' id='kick'>
+      kick
+    </h3>
+
+
+  </div>
+
+
+  <p>Lets the user kick a guild member.</p>
+
+
+  <div class='pre p1 fill-light mt0'>)kick [u] [r]</div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>u</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    Mention of a member
+
+          </div>
+
+        </div>
+
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>r</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>`${message.author.username} kicked ${u[0].username}#${u[0].discriminator}, with no reason.`</code>)</code>
+	    Reason for the member being kicked
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+
+  <div class='clearfix'>
+
+    <h3 class='fl m0' id='pick'>
+      pick
+    </h3>
+
+
+  </div>
+
+
+  <p>Gets an array from the user, and then returns a random item.</p>
+
+
+  <div class='pre p1 fill-light mt0'>)pick [args]</div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>args</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a>)</code>
+	    A list of items to pick from, seperates by spaces.
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        Random item form the array
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+
+  <div class='clearfix'>
+
+    <h3 class='fl m0' id='play'>
+      play
+    </h3>
+
+
+  </div>
+
+
+  <p>The play command--the core of the bot.</p>
+
+
+  <div class='pre p1 fill-light mt0'>)play [args]</div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>args</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+            = <code>1</code>)</code>
+	    Amount of "bullets" to be used. (coming soon)
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+
+  <div class='clearfix'>
+
+    <h3 class='fl m0' id='prefix'>
+      prefix
+    </h3>
+
+
+  </div>
+
+
+  <p>Sets a new prefix for the server the command is being executed in.</p>
+
+
+  <div class='pre p1 fill-light mt0'>)prefix [args]</div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>args</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The new prefix's character(s)
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+
+  <div class='clearfix'>
+
+    <h3 class='fl m0' id='restart'>
+      restart
+    </h3>
+
+
+  </div>
+
+
+  <p>Restarts the bot's Node server.</p>
+
+
+  <div class='pre p1 fill-light mt0'>)restart [args]</div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>args</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>0</code>)</code>
+	    Reason for restarting the bot
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+
+  <div class='clearfix'>
+
+    <h3 class='fl m0' id='secrets'>
+      secrets
+    </h3>
+
+
+  </div>
+
+
+  <p>Quote-on-quote secret commands, that don't fit the general purpose of the bot.</p>
+
+
+  <div class='pre p1 fill-light mt0'>)secrets [args]</div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>args</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>&quot;help&quot;</code>)</code>
+	    The name of a secret command
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+
+  <div class='clearfix'>
+
+    <h3 class='fl m0' id='stats'>
+      stats
+    </h3>
+
+
+  </div>
+
+
+  <p>Gets your stored information from the database, stuff like the amount of times you've used the play command, or how many times you lost.</p>
+
+
+  <div class='pre p1 fill-light mt0'>)stats [u]</div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>u</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>yourself</code>)</code>
+	    Mention of a member in the server.
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+
+  <div class='clearfix'>
+
+    <h3 class='fl m0' id='suggest'>
+      suggest
+    </h3>
+
+
+  </div>
+
+
+  <p>Lets you suggest features for the bot.</p>
+
+
+  <div class='pre p1 fill-light mt0'>)suggest [args]</div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>args</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    a suggestion
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+      </div>
+    </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/split.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+
+<style>
+  * {
+    background-color: #000 !important;
+    color: #fff !important;
+  }
+
+  a {
+    color: #ff0000 !important;
+  }
+
+  #russian-roulette {
+    color: #E30B5D !important;
+  }
+
+  #filter-input {
+    border-color: #1a1a1a;
+  }
+</style>
+</html>
