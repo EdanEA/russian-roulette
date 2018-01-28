@@ -9,13 +9,13 @@ exports.run = function(message, args) {
   if(cm === false) return message.channel.createMessage(`<@${message.author.id}>, no >:(((((`);
 
   var u = message.mentions;
-  if(!u) return message.channel.createMessage(`<@${message.author.id}>, how do you expect me to kick a nigger, if you don't @ said nigger, nigger?`);
+  if(!u[0]) return message.channel.createMessage(`<@${message.author.id}>, how do you expect me to kick a nigger, if you don't @ said nigger, nigger?`);
   if(u[0].id === message.author.id) return message.channel.createMessage("hahahahahahah, fuck off, actually.")
 
   var c = perms.compare(message.member, message.channel.guild.members.get(u[0].id));
   if(c === false) return message.channel.createMessage(`<@${message.author.id}>, D\`::::`);
 
-  var cb = perms.compare(message.channel.guild.members.get(client.id), message.channel.guild.members.get(u[0].id));
+  var cb = perms.compare(message.channel.guild.members.get(client.user.id), message.channel.guild.members.get(u[0].id));
   if(cb === false) return message.channel.createMessage(`<@${message.author.id}>, why don't you move me higher in the hierarchy if you wanna boot some niggas, eh?`)
 
   var r = message.content.split(u[0]).slice(1);

@@ -1,5 +1,5 @@
 module.exports = {
-  randomStatus(t) {
+  status(t) {
     var statuses = [
       { name: "try )secrets",   type: 0 },
       { name: "your screams", type: 2 },
@@ -8,18 +8,22 @@ module.exports = {
       { name: "join shit server: https://discord.me/xdd", type: 1, url: "https://discord.me/xdd" },
       { name: `in ${client.guilds.size} servers | Use )help`},
       { name: "https://github.com/EdanEA/russian-roulette", type: 1, url: "https://github.com/EdanEA/russian-roulette" },
-      { name: "Look at the shit website: https://edanea.github.io", type:1, url: "https://edanea.github.io" },
-      { name: "eat me out with a bit of mustard", type: 2}
+      { name: "Look at the shit website: https://edanea.github.io/russian-roulette", type:1, url: "https://edanea.github.io/russian-roulette" },
+      { name: "eat me out with a bit of mustard", type: 2 }
     ];
 
 
-    if(!t) return client.editStatus("dnd",statuses[Math.floor(Math.random() * statuses.length)]);
-    else client.editStatus("dnd", statuses[t]);
-    console.log(statuses[t]);
-    return;
+    if(!t) {
+      var status = statuses[Math.floor(Math.random() * statuses.length)];
+      client.editStatus("dnd", status);
+      return status;
+    } else {
+      client.editStatus("dnd", statuses[t]);
+      return statuses[t];
+    }
   },
 
-  dailyBackup() {
+  backup() {
     client.getDMChannel(owner.id).then(channel => {
       var t = moment().format("MMM Do YY");
       var data = fs.readFileSync('./stats.sqlite');

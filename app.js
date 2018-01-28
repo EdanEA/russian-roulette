@@ -14,10 +14,10 @@ global.prefixes = require('./prefixes.json');
 global.blacklist = require('./blacklist.json');
 require('./guild.js');
 
-global.client = new Eris.Client(k.alt, { connectionTimeout: 60000, maxShards: 2 });
+global.client = new Eris.Client(k.bot.token, { connectionTimeout: 60000, maxShards: 2 });
 global.admins = { "josh":"117728104935456770", "hunter":"228963688910946304", "john":"148958241378926593" };
 global.owner = { "id":"221740788462256138" };
-global.bot = {"id": "305602159741763585", "logs":"382001924251320322", "suggestchannel":"382001960984772609", "testingserver":"312667247808217088", "officialserver":"380310916341956610", "prefix":"("};
+global.bot = {"id": "305602159741763585", "logs":"382001924251320322", "suggestchannel":"382001960984772609", "testingserver":"312667247808217088", "officialserver":"380310916341956610", "prefix":")"};
 
 sql.open('./stats.sqlite');
 
@@ -33,18 +33,30 @@ process.on('exit', (code) => {
   console.log(`Exited with code ${code}`);
 });
 
+client.on("error", (e, id) => {
+  console.log(`Error at ${id}:\n${e.stack}`);
+});
+
+client.on("warn", (e, id) => {
+  console.log(`Warning at ${id}:\n${e.stack}`);
+});
+
 client.on("ready", () => {
   console.log(c.blue(`Damn Daniel.\nServer Amount: ${client.guilds.size}`));
-  misc.randomStatus();
+  misc.status();
+
   client.guilds.forEach(g => {
-    if(!prefixes[g.id]) prefixes[g.id] = "("
+    if(!prefixes[g.id]) prefixes[g.id] = ")"
   });
 
   client.users.forEach(u => {
     if(!blacklist[u.id]) blacklist[u.id] = false;
   });
-  new snek('POST', `https://bots.discord.pw/api/bots/${bot.id}/stats`).set('Authorization', k.bdt).send({ server_count: client.guilds.size }).then(() => { console.log("Sent server amount to bots.discord.pw successfully.") }).catch(e => { if(e) throw e.stack; return; });
-  new snek('POST', `https://discordbots.org/api/bots/${bot.id}/stats`).set('Authorization', k.dblt).send({ server_count: client.guilds.size }).then(() => { console.log("Sent server amount to discordbots.org successfully.") }).catch(e => { if(e) throw e.stack; return; });
+
+  sql.run('CREATE TABLE IF NOT EXISTS players (userID, plays, wins, loses)');
+
+  snek.post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`, {headers: {Authorization: k.keys.dbots}}).send({server_count: client.guilds.size}).end(() => { console.log(`Successfully send server amount to bots.discord.pw`) });
+  snek.post(`https://discordbots.org/api/bots/${client.user.id}/stats`, {headers: {Authorization: k.keys.dbots}}).send({server_count: client.guilds.size}).then((r) => { console.log(`Successfully sent server amount to discordbots.org`)});
 });
 
 client.on("guildCreate", guild => {
@@ -52,12 +64,13 @@ client.on("guildCreate", guild => {
   guild.defaultChannel.createMessage(`\`\`\`Hey, I'm Russian roulette. ~~I know, it's a shitty name; blame the developer.~~ I'm just a bot, mainly used to play Russian roulette, but I also have some fun commands, and a lot more coming. We're always looking for new feautures, so if you have an idea use the ")suggest" command -- you could also join the discord server and tell the developer himself. Server Invite: https://discord.me/xdd.\`\`\``);
   prefixes[guild.id] = "(";
   try {
-    client.guilds.get(bot.officialserver).channels.get(bot.logs).createMessage(`I've joined ${guild.name}. Server amount: ${client.guilds.size}.`);
+    client.createMessage(bot.logs, `I've joined ${guild.name}. Server amount: ${client.guilds.size}.`);
   } catch (e) {
-    console.log(c.bgRed("Invite me back to the test server, you bitch.\n" + e.stack));
+    console.log(c.bgRed("Invite me back to the server, you bitch.\n" + e.stack));
   }
-  new snek('POST', `https://bots.discord.pw/api/bots/${bot.id}/stats`).set('Authorization', k.bdt).send({ server_count: client.guilds.size }).then(() => { console.log("Sent server amount to bots.discord.pw successfully.") }).catch(e => { if(e) throw e.stack; return; });
-  new snek('POST', `https://discordbots.org/api/bots/${bot.id}/stats`).set('Authorization', k.dblt).send({ server_count: client.guilds.size }).then(() => { console.log("Sent server amount to discordbots.org successfully.") }).catch(e => { if(e) throw e.stack; return; });
+
+  snek.post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`, {headers: {Authorization: k.keys.dbots}}).send({server_count: client.guilds.size}).end(() => { console.log(`Successfully send server amount to bots.discord.pw`) });
+  snek.post(`https://discordbots.org/api/bots/${client.user.id}/stats`, {headers: {Authorization: k.keys.dbots}}).send({server_count: client.guilds.size}).then((r) => { console.log(`Successfully sent server amount to discordbots.org`)});
 });
 
 client.on('guildDelete', guild => {
@@ -67,18 +80,8 @@ client.on('guildDelete', guild => {
   } catch (e) {
     console.log(c.bgRed("Invite me back to the test server, you bitch.\n" + e.stack));
   }
-  new snek('POST', `https://bots.discord.pw/api/bots/${bot.id}/stats`).set('Authorization', k.bdt).send({ server_count: client.guilds.size }).then(() => { console.log("Sent server amount to bots.discord.pw successfully.") }).catch(e => { if(e) throw e.stack; return; });
-  new snek('POST', `https://discordbots.org/api/bots/${bot.id}/stats`).set('Authorization', k.dblt).send({ server_count: client.guilds.size }).then(() => { console.log("Sent server amount to discordbots.org successfully.") }).catch(e => { if(e) throw e.stack; return; });
-});
-
-client.on('guildMemberAdd', (guild, member) => {
-  if(guild.id === bot.officialserver) return;
-
-  if(member.id === owner.id) {
-    client.createMessage(guild.defaultChannel.id, `oh shit, it's <@${member.id}>, that's the dev.`)
-  } else if(member.id === admins.josh || member.id === admins.john || member.id === admins.hunter) {
-    client.createMessage(guild.defaultChannel.id, `oh shit, it's <@${member.id}>, that's a staff member of the bot.`)
-  } else return;
+  snek.post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`, {headers: {Authorization: k.keys.dbots}}).send({server_count: client.guilds.size}).end(() => { console.log(`Successfully send server amount to bots.discord.pw`) });
+  snek.post(`https://discordbots.org/api/bots/${client.user.id}/stats`, {headers: {Authorization: k.keys.dbots}}).send({server_count: client.guilds.size}).then((r) => { console.log(`Successfully sent server amount to discordbots.org`)});
 });
 
 client.on("messageCreate", (message) => {
@@ -100,13 +103,15 @@ client.on("messageCreate", (message) => {
     if(e.message.includes('Cannot find module') || e.message.includes('ENOENT')) return;
     console.log(c.red(e.stack));
 
-    if(e.length > 1990) return;
+    if(e.length > 2000) return;
     message.channel.createMessage(`\`\`\`${e}\`\`\``);
   }
 });
 
-setInterval(misc.randomStatus, 1800000);
-setInterval(misc.dailyBackup, 86400000);
+setInterval(misc.status, 1800000);
+setInterval(misc.backup, 86400000);
 
 client.connect();
-// rip my guy stringer
+// First they steal CeeLo Green, then they hide her.
+// That's already too far -- but then they fucking slice her up with a gas powered chainsaw.
+// Smh, fam squad.

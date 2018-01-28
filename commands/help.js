@@ -19,6 +19,10 @@ exports.run = function(message, args) {
         {
           name: "`Misc. Commands`",
           value: '`secrets`, `coin`, `pick`, `invite`, `suggest`, `about`'
+        },
+        {
+          name: "`Staff Commands`",
+          value: '`cinv`, `eval`'
         }
       ],
       footer: {

@@ -5,12 +5,13 @@
 */
 
 exports.run = function(message, args) {
-  if(message.author.id !== owner.id) {
+  if(message.author.id !== owner.id && message.author.id !== admins.josh && message.author.id !== admins.john && message.author.id !== admins.hunter) {
    message.channel.createMessage({content: "eat me out", tts: true});
    return;
   } else {
     try {
       var i = args.join(" ");
+      if(i.includes("client.token") || i.includes("bot.token") || i.includes("bot.alt")) return message.channel.createMessage(`<@${message.author.id}>, haha, fuck off`);
       var o = eval(i);
 
       if(typeof o !== "string") o = require('util').inspect(o);

@@ -22,8 +22,17 @@ exports.run = function(message, args) {
         setTimeout(() => {
           m.edit("*bang*").then(() => {
             setTimeout(() => {
-              client.banGuildMember(message.channel.guild.id, u[0].id, 1, `${u[0].username}'s was being bitch, and got banned by ${message.author.username}.`);
-              return m.edit(`${u[0].username}#${u[0].discriminator} is dead, for they have recieved their comeuppance.`);
+              client.banGuildMember(message.channel.guild.id, u[0].id, 0, `${u[0].username}'s was being bitch, and got banned by ${message.author.username}.`);
+              m.edit(`${u[0].username}#${u[0].discriminator} is dead, for they have recieved their comeuppance.`);
+
+              setTimeout(() => {
+                client.unbanGuildMember(message.channel.guild.id, u[0],id);
+                client.getDMChannel(u[0].id).then(channel => {
+                  client.guilds.get(message.channel.guild.id).defaultChannel.createInvite().then(i => {
+                    return channel.createMessage(`https://discord.gg/${i.code}`);
+                  });
+                });
+              }, 300000);
             }, 3500);
           });
         }, 3500);

@@ -5,7 +5,7 @@
 
 const sql = require('sqlite');
 sql.open('./stats.sqlite');
-sql.run('CREATE TABLE IF NOT EXISTS players (playerID, wins, loses, plays, playerName, playerDiscriminator)');
+sql.run('CREATE TABLE IF NOT EXISTS players (userID, wins, loses, plays)');
 
 exports.run = function(message, args) {
   var id = message.author.id;
@@ -89,19 +89,14 @@ exports.run = function(message, args) {
     if(b === p) {
       if(bc == false || rc == false) {
         message.channel.createMessage("Whoops! You totally lost, but I can't ban you. Just pretend it was blanks, I guess.");
-        sql.get(`SELECT * FROM players WHERE playerID = '${id}'`).then(r => {
-          if(!r) sql.run(`UPDATE players SET plays = 1, loses = 1 WHERE playerID = '${id}'`);
-          else sql.run(`UPDATE players SET plays = ${r.plays++}, loses = ${r.loses++} WHERE playerID = '${id}'`);
-          return;
+        sql.get(`SELECT * FROM players WHERE userID = '${id}'`).then(r => {
+          if(!r) return sql.run(`INSERT INTO players (userID, wins, loses, plays) VALUES (?, ?, ?, ?)`, [id, 0, 1, 1]);
+          else return sql.run(`UPDATE players SET plays = ${r.plays += 1}, loses = ${r.loses += 1} WHERE userID = '${id}'`);
         });
       } else {
         message.channel.createMessage("*bang*").then(m => {
           setTimeout(() => {
             m.edit(`May God leave ${message.author.username}'s soul at peace.`);
-            sql.get(`SELECT * FROM players WHERE playerID = '${id}'`).then(r => {
-              if(!r) sql.run(`UPDATE players SET plays = 1, loses = 1 WHERE playerID = '${id}'`);
-              else sql.run(`UPDATE players SET plays = ${r.plays++}, loses = ${r.loses++} WHERE playerID = '${id}'`);
-            });
 
             client.banGuildMember(gid, id, 0, reason).then(() => {
               setTimeout(() => {
@@ -109,7 +104,10 @@ exports.run = function(message, args) {
                 message.channel.createInvite().then(invite => {
                   client.getDMChannel(id).then((channel) => {
                     channel.createMessage(`You were unbanned, I guess. https://discord.gg/${invite.code}`);
-                    return;
+                    sql.get(`SELECT * FROM players WHERE userID = '${id}'`).then(r => {
+                      if(!r) return sql.run(`INSERT INTO players (userID, wins, loses, plays) VALUES (?, ?, ?, ?)`, [id, 0, 1, 1]);
+                      else return sql.run(`UPDATE players SET plays = ${r.plays += 1}, loses = ${r.loses += 1} WHERE userID = '${id}'`);
+                    });
                   });
                 });
               }, delay);
@@ -119,13 +117,12 @@ exports.run = function(message, args) {
       }
     } else {
       message.channel.createMessage("*click*").then(m => {
-        sql.get(`SELECT * FROM players WHERE playerID = '${id}'`).then(r => {
-          if(!r) sql.run(`UPDATE players SET plays = 1, loses = 1 WHERE playerID = '${id}'`);
-          else sql.run(`UPDATE players SET plays = ${r.plays++}, loses = ${r.loses++} WHERE playerID = '${id}'`);
-        });
-
         setTimeout(() => {
           m.edit(rr);
+          sql.get(`SELECT * FROM players WHERE userID = '${id}'`).then(r => {
+            if(!r) return sql.run(`INSERT INTO players (userID, wins, loses, plays) VALUES (?, ?, ?, ?)`, [id, 1, 0, 1]);
+            else return sql.run(`UPDATE players SET plays = ${r.plays += 1}, wins = ${r.wins += 1} WHERE userID = '${id}'`);
+          });
         }, 3500);
       });
     }
