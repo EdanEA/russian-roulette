@@ -6,9 +6,9 @@
 exports.run = function(message, args) {
   var u = message.mentions;
   try {
-    sql.run('CREATE TABLE IF NOT EXISTS players (playerID, wins, loses)');
+    sql.run('CREATE TABLE IF NOT EXISTS players (userID, wins, loses)');
     if(!u[0]) {
-      sql.get(`SELECT * FROM players WHERE playerID = '${message.author.id}'`).then(r => {
+      sql.get(`SELECT * FROM players WHERE userID = '${message.author.id}'`).then(r => {
         if(!r) {
           sql.run(`INSERT INTO players (userID, wins, loses, plays) VALUES (?, ?, ?, ?)`, [message.author.id, 0, 0, 0]);
           return message.channel.createMessage({embed: {
@@ -57,8 +57,8 @@ exports.run = function(message, args) {
 
 
 
-    else if(u[0] && u[0].id !== bot.id) {
-      sql.get(`SELECT * FROM players WHERE playerID = '${message.channel.guild.members.get(u[0].id).user.id}'`).then(r => {
+    else if(u[0]) {
+      sql.get(`SELECT * FROM players WHERE userID = '${message.channel.guild.members.get(u[0].id).user.id}'`).then(r => {
         if(!r) {
           sql.run('INSERT INTO players (userID, wins, loses, plays) VALUES (?, ?, ?, ?)', [u[0].id, 0, 0, 0])
           return client.createMessage(message.channel.id, {embed: {
