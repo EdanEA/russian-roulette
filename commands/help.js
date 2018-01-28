@@ -22,7 +22,7 @@ exports.run = function(message, args) {
         },
         {
           name: "`Staff Commands`",
-          value: '`cinv`, `eval`'
+          value: '`cinv`, `eval`, `blacklist`'
         }
       ],
       footer: {
