@@ -5,11 +5,11 @@
 
 exports.run = function(message, args) {
   var ca = perms.checkAdmin(message);
-  if(ca == false) return message.channel.createMessage("nah, my nigga, you can't use this.");
+  if(ca == false) return message.channel.createMessage("nah, you can't use this.");
 
   var p = args[0];
-  if(p >= 10) return message.channel.createMessage("that's too long, daddy, I can't fit it all. D`:");
-  if(!p) return message.channel.createMessage("gotta leave me something for a new prefix, cuck.");
+  if(p >= 10) return message.channel.createMessage("that's too long, daddy, I can't fit it all in! D`:");
+  if(!p) return message.channel.createMessage("gotta leave me something for a new prefix.");
 
   var gid = message.channel.id;
 

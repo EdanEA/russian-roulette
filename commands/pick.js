@@ -6,7 +6,7 @@
 
 exports.run = function(message, args) {
   if(!args) return message.channel.createMessage("reee, leave a list, you cuck.");
-  return message.channel.createMessage(`wow, you should totally do the \`${args[Math.floor(Math.random()*args.length)]}\` one, ~~you little fucking slut~~.`)
+  message.channel.createMessage(`I pick the, uhhhhhhhhhhhhhhhhhhhhhhh, this one: \`${args[Math.floor(Math.random()*args.length)]}\``);
 };
 
 exports.info = {

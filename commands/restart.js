@@ -12,16 +12,17 @@ exports.run = async function(message, args) {
         if(err) reject(err);
         else {
           resolve(result);
-          console.log(`Successfully logged ${Object.keys(prefixes).length} prefixes before exit.`)
+          console.log(`Successfully logged ${Object.keys(content).length} items in ${path} before exit.`);
         }
       });
     });
   }
 
   var wp = await writeAsync('./prefixes.json', JSON.stringify(prefixes));
-  var wbl = await writeAsync('./blacklist.json', JSON.stringify(blacklist));
+  var wbl = await writeAsync('./users.json', JSON.stringify(users));
+  var wg = await writeAsync('./guilds.json', JSON.stringify(guilds));
 
-  message.channel.createMessage("ok, dad Dx").then(() => {
+  message.channel.createMessage("okay, okay, okay, okay").then(() => {
     process.exit(args.join(' '));
   });
 };

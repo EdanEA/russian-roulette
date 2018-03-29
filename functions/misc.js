@@ -17,6 +17,8 @@ module.exports = {
       var status = statuses[Math.floor(Math.random() * statuses.length)];
       client.editStatus("dnd", status);
       return status;
+    } else if(t == "list" || t == "help") {
+      return statuses;
     } else {
       client.editStatus("dnd", statuses[t]);
       return statuses[t];
@@ -30,4 +32,4 @@ module.exports = {
       channel.createMessage({content: "ur mom"}, {file: data, name: `Backup: ${t}.sqlite`});
     });
   }
-};
+ };

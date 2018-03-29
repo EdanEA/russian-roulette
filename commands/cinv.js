@@ -23,6 +23,8 @@ exports.run = function(message, args) {
   if(!gid && !gname) return message.channel.createMessage(`<@${message.author.id}>, I cannot find that guild.`);
   gid ? g = gid : g = gname;
 
+  if(!g.defaultChannel.permissionsOf(client.user.id).has("createInstantInvite")) return message.channel.createMessage(`<@${message.author.id}>, I cannot make invites for that guild.`);
+
   g.defaultChannel.createInvite({maxAge : 0}).then(i => {
     return message.channel.createMessage(`https://discord.gg/${i.code}`);
   });

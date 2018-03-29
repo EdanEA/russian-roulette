@@ -14,11 +14,15 @@ exports.run = function(message, args) {
         },
         {
           name: '`Admin Commands`',
-          value: '`ban`, `kick`, `prefix`'
+          value: '`ban`, `kick`, `prune`, `prefix`'
         },
+		    {
+		      name: '`Fun Commands`',
+		      value: '`secrets`, `insult`, `rps`, `coin`, `roll`'
+		    },
         {
           name: "`Misc. Commands`",
-          value: '`secrets`, `coin`, `pick`, `invite`, `suggest`, `about`'
+          value: '`coin`, `pick`, `invite`, `suggest`, `about`'
         },
         {
           name: "`Staff Commands`",
@@ -32,6 +36,7 @@ exports.run = function(message, args) {
   } else {
     try {
       let command = require(`../commands/${args[0]}.js`).info;
+      command.usage = command.usage.replace(")", prefixes[message.channel.guild.id]);
 
       client.createMessage(message.channel.id, {embed: {
         color: 0xCD2626,
@@ -44,8 +49,8 @@ exports.run = function(message, args) {
         ]
       }});
     } catch (e) {
-      throw c.red(e.stack);
       message.channel.createMessage(`\`\`\`${e}\`\`\``);
+      throw c.red(e.stack);
     }
   }
 };

@@ -7,7 +7,6 @@ exports.run = function(message, args) {
   var s = args.join(' ');
 
   if(!s) return message.channel.createMessage(`Hey, bud, you gotta actually suggest something.`);
-  if(s == "command") return message.channel.createMessage(`Please actually suggest something.`);
 
   try {
     message.channel.createInvite().then(i => {
@@ -27,8 +26,8 @@ exports.run = function(message, args) {
       });
     });
   } catch (e) {
-    throw c.red(e.stack);
     message.channel.send(`\`\`\`${e}\`\`\``);
+    throw c.red(e.stack);
   }
 };
 

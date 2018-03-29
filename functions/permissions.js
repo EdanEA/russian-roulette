@@ -13,8 +13,11 @@ module.exports = {
   compare(m1, m2) {
     if(m1.id === m1.guild.ownerID) return true;
     else if(m2.id === m2.guild.ownerID) return false;
-    else if(!m1.roles[0]) return false;
-    else if(!m2.roles[0]) return true;
+
+    if(!m1.highestRole) return false;
+    else if(!m2.highestRole) return true;
+
+    if(m1.highestRole.position <= m2.highestRole.position) return false;
     else return true;
   },
 

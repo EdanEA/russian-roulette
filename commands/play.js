@@ -14,14 +14,8 @@ exports.run = function(message, args) {
 
   var a = parseInt(args[0]);
 
-  var reasons = [ "Damn, bro, their brains splattered everywhere. It was fuckin' crazy; should've been there.", `Lol, ${message.author.username}'s so shit. They lost to a %16 percent chance of dying. Literal garbage.`, "I WAS CONCEIVED BY MY DISEASE", "D:" ];
-  var reason = reasons[Math.floor(Math.random() * reasons.length)];
-
   var delays = [ 150000, 180000, 60000, 30000, 300000 ];
   var delay = delays[Math.floor(Math.random() * delays.length)];
-
-  var rrs = [ "Damn, bro, you beat the 16% chance that you'd get beaned (that is if the owners of the server set my role high enough)", "Yeet, you get to survive, my guy.", "Fucking hell! This isn't fair. >:(((\nYou should go again...", "John's a nigger, lol. Btw you didn't lose." ];
-  var rr = rrs[Math.floor(Math.random() * rrs.length)];
 
   var bm = message.channel.guild.members.get(bot.id);
   var pm = message.member;
@@ -29,6 +23,47 @@ exports.run = function(message, args) {
   var rc = perms.compare(bm, pm);
 
   if(!a) var a = 1;
+
+  var replies;
+
+  var baseReplies = {
+    reasons: [
+      "Damn, bro, their brains splattered everywhere. It was fuckin' crazy; should've been there.",
+      `Lol, ${message.author.username}'s so shit. They lost to like a ${(a * 16).toString()}% percent chance of dying. Literal garbage.`,
+      "I WAS CONCEIVED BY MY DISEASE",
+      "D:"
+    ],
+    rrs: [
+      `Damn, bro, you beat the ${(a * 16).toString()}% chance that you'd get beaned.`,
+      "Yeet, you get to survive, my guy.",
+      "Fucking hell! This isn't fair. >:(((\nYou should go again...",
+      "John's a nigger, lol. Btw you didn't lose."
+    ],
+    tooHigh: `<@${id}>, damn, bro, that's too high, man. You don't wanna fucking die, do you?`,
+    tooLow: `<@${id}>, you can't put less than one bullet, pussy-boi.`
+  }
+
+  var censoredReplies = {
+    reasons: [
+      "Damn, bro, their brains splattered everywhere. It was crazy; should've been there.",
+      `Lol, ${message.author.username}'s so traaaaaaaaaaaaash. They lost to like a ${(a * 16).toString()}% percent chance of dying. Literal garbage.`,
+      "I WAS CONCEIVED BY MY DISEASE",
+      "D:"
+    ],
+    rrs: [
+      `Aw yeah, you beat the ${(a * 16).toString()}% chance that you'd get beaned.`,
+      "Yeet, you get to survive, my guy.",
+      "This isn't fair. >>>:'(((\nYou should go again...",
+      "John's a person of African decent, lol. Btw you didn't lose."
+    ],
+    tooHigh: `<@${id}>, that's too high, man. If ya wanna kill yourself, this ain't the way, boi-o.`,
+    tooLow: `<@${id}>, c'mon, don't be like that -- trying to put nothing in the virtual gun. swmh (shaking with my hand)`
+  }
+
+  guilds[message.channel.guild.id].censor == true ? replies = censoredReplies : replies = baseReplies;
+
+  var rr = replies.rrs[Math.floor(Math.random() * replies.rrs.length)];
+  var reason = replies.reasons[Math.floor(Math.random() * replies.reasons.length)];
 
   function checkBP(bullets) {
     if(bullets.length === 1) return;
@@ -72,9 +107,9 @@ exports.run = function(message, args) {
         break;
       default:
         if(a > 5)
-          return mesage.channel.createMessage(`<@${id}>, damn, bro, that's too high, man. You don't wanna fucking die, do you?`);
-        else
-          return message.channel.createMessage(`<@${id}>, you can't put less than one bullet, pussy-boi.`);
+          return message.channel.createMessage(replies.tooHigh);
+        else if(a < 1)
+          return message.channel.createMessage(replies.tooLow);
     }
 
     checkBP(b);
@@ -87,7 +122,7 @@ exports.run = function(message, args) {
     }
 
     if(b === p) {
-      if(bc == false || rc == false) {
+      if(guilds[message.channel.guild.id].banPlay == false || bc == false || rc == false || args[0] == 'safe') {
         message.channel.createMessage("Whoops! You totally lost, but I can't ban you. Just pretend it was blanks, I guess.");
         sql.get(`SELECT * FROM players WHERE userID = '${id}'`).then(r => {
           if(!r) return sql.run(`INSERT INTO players (userID, wins, loses, plays) VALUES (?, ?, ?, ?)`, [id, 0, 1, 1]);
@@ -134,6 +169,6 @@ exports.run = function(message, args) {
 
 exports.info = {
   usage: ")play [args]",
-  args: "[number or none]",
+  args: "The number of bullets to be used, nothing, or safe if you don't wanna get banned.",
   description: "Feeling suicidal? Just want a bit of thrill? Then play some Russian roulette."
 };

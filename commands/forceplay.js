@@ -4,7 +4,25 @@
 */
 
 exports.run = function(message, args) {
+  var replies;
+
+  var baseReplies = {
+    noMention: `<@${message.author.id}>, ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh! Fuck! I just want command arguments. Is that so much to ask for?`,
+    userCannotBan: `<@${message.author.id}>, nope, can't use this on _them_, cuck-boi.`,
+    banReason: `{username} was being bitch, and got banned by ${message.author.username}`
+  };
+
+  var censoredReplies = {
+    noMention: `<@${message.author.id}>, ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh! Hecc! I just want command arguments. Is that so much to ask for?`,
+    userCannotBan: `<@${message.author.id}>, nope, can't use this on _them_, heccin' boi-o.`,
+    banReason: `{username} was being a real meanie, and got banned by ${message.author.username}`
+  };
+
+  guilds[message.channel.guild.id].censor == true ? replies = censoredReplies : replies = baseReplies;
+
+
   var u = message.mentions;
+  if(!u[0]) return message.channel.createMessage(replies.noMention);
   if(u[0].id === message.author.id) return message.channel.createMessage(`<@${message.author.id}>, hahaha! Fuck off, actually.`);
 
   var ca = perms.checkAdmin(message);
@@ -22,17 +40,21 @@ exports.run = function(message, args) {
         setTimeout(() => {
           m.edit("*bang*").then(() => {
             setTimeout(() => {
-              client.banGuildMember(message.channel.guild.id, u[0].id, 0, `${u[0].username}'s was being bitch, and got banned by ${message.author.username}.`);
+              client.banGuildMember(message.channel.guild.id, u[0].id, 0, replies.banReason.replace("{username}", u[0].username));
               m.edit(`${u[0].username}#${u[0].discriminator} is dead, for they have recieved their comeuppance.`);
 
-              setTimeout(() => {
-                client.unbanGuildMember(message.channel.guild.id, u[0],id);
-                client.getDMChannel(u[0].id).then(channel => {
-                  client.guilds.get(message.channel.guild.id).defaultChannel.createInvite().then(i => {
-                    return channel.createMessage(`https://discord.gg/${i.code}`);
+              if(guilds[message.channel.guild.id].fpInvite == true) {
+                setTimeout(() => {
+                  client.unbanGuildMember(message.channel.guild.id, u[0].id);
+                  client.getDMChannel(u[0].id).then(channel => {
+                    client.guilds.get(message.channel.guild.id).defaultChannel.createInvite().then(i => {
+                      channel.createMessage(`https://discord.gg/${i.code}`);
+                    });
                   });
-                });
-              }, 300000);
+                }, 300000);
+              } else {
+                return;
+              }
             }, 3500);
           });
         }, 3500);
@@ -40,15 +62,15 @@ exports.run = function(message, args) {
         setTimeout(() => {
           m.edit("*click*").then(() => {
             setTimeout(() => {
-              return m.edit("I guess they get to live >:((((");
+              m.edit("I guess they get to live >:((((");
             }, 3500);
           });
         }, 3500);
       }
     });
   } catch (e) {
+    message.channel.createMessage(`Uh-oh, something went wrong. \`\`\`${e}\`\`\``);
     throw c.red(e.stack);
-    message.channel.createMessage(`Uh-oh, there was a fuck up, send this error to the dev, or don't -- I don't care. Check )about for info on how.\`\`\`${e}\`\`\``);
   }
 };
 
