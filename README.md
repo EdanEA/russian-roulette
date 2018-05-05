@@ -1,6 +1,4 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5a3097cd44684c77a165acfc1bd3acc7)](https://www.codacy.com/app/EdanEA/russian-roulette?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=EdanEA/russian-roulette&amp;utm_campaign=Badge_Grade)
-[![Discord Bots](https://discordbots.org/api/widget/status/305602159741763585.svg?noavatar=true)](https://discordbots.org/bot/305602159741763585)
-[![Discord Bots](https://discordbots.org/api/widget/servers/305602159741763585.svg?noavatar=true)](https://discordbots.org/bot/305602159741763585)
 [![Discord Server](https://discordapp.com/api/guilds/380310916341956610/embed.png)](https://discord.me/xdd)
 # Russian Roulette
 ## What is this?
