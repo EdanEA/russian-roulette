@@ -1,6 +1,6 @@
 {
   "name": "russian-roulette",
-  "version": "1.8.5",
+  "version": "1.9.0",
   "description": "A rewrite of the Russian Roulette Discord bot",
   "main": "app.js",
   "scripts": {
