@@ -299,7 +299,7 @@
   <p>Gives a bit of information about the bot and it's developer.</p>
 
 
-  <div class='pre p1 fill-light mt0'>about</div>
+  <div class='pre p1 fill-light mt0'>)about</div>
   
   
 
@@ -346,7 +346,7 @@
   <p>Allows an admin to ban a guild member.</p>
 
 
-  <div class='pre p1 fill-light mt0'>ban</div>
+  <div class='pre p1 fill-light mt0'>)ban [u] [r]</div>
   
   
 
@@ -417,7 +417,7 @@
   <p>Blcklists a user from using the bot's commands.</p>
 
 
-  <div class='pre p1 fill-light mt0'>blacklist</div>
+  <div class='pre p1 fill-light mt0'>)blacklist [args]</div>
   
   
 
@@ -486,7 +486,7 @@
   <p>Creates an invite to any server the bot is in remotely.</p>
 
 
-  <div class='pre p1 fill-light mt0'>cinv</div>
+  <div class='pre p1 fill-light mt0'>)cinv [args]</div>
   
   
 
@@ -555,7 +555,7 @@
   <p>Shitty coin command - lets you guess what side of a coin will land on.</p>
 
 
-  <div class='pre p1 fill-light mt0'>coin</div>
+  <div class='pre p1 fill-light mt0'>)coin [args]</div>
   
   
 
@@ -616,7 +616,7 @@
   <p>Allows you to configure the bot.</p>
 
 
-  <div class='pre p1 fill-light mt0'>config</div>
+  <div class='pre p1 fill-light mt0'>)config [set] [args]</div>
   
   
 
@@ -686,7 +686,7 @@
   <div class='clearfix'>
     
     <h3 class='fl m0' id='evaluate'>
-      evaluate
+      eval
     </h3>
     
     
@@ -696,7 +696,7 @@
   <p>Evaluates code remotely (Owner only).</p>
 
 
-  <div class='pre p1 fill-light mt0'>evaluate</div>
+  <div class='pre p1 fill-light mt0'>)eval [i]</div>
   
   
 
@@ -765,7 +765,7 @@
   <p>Allows an admin to force a guild member to play Russian roulette.</p>
 
 
-  <div class='pre p1 fill-light mt0'>forceplay</div>
+  <div class='pre p1 fill-light mt0'>)forceplay [u]</div>
   
   
 
@@ -826,7 +826,7 @@
   <p>Gives some info on the current guild.</p>
 
 
-  <div class='pre p1 fill-light mt0'>guild</div>
+  <div class='pre p1 fill-light mt0'>)guild</div>
   
   
 
@@ -873,7 +873,7 @@
   <p>Gives information on the bot's commands.</p>
 
 
-  <div class='pre p1 fill-light mt0'>help</div>
+  <div class='pre p1 fill-light mt0'>)help [args]</div>
   
   
 
@@ -935,7 +935,7 @@
   <p>Gives info on a user.</p>
 
 
-  <div class='pre p1 fill-light mt0'>info</div>
+  <div class='pre p1 fill-light mt0'>)info [u]</div>
   
   
 
@@ -1005,7 +1005,7 @@
   <p>Insults someone.</p>
 
 
-  <div class='pre p1 fill-light mt0'>insult</div>
+  <div class='pre p1 fill-light mt0'>)insult [u]</div>
   
   
 
@@ -1022,7 +1022,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>args</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>u</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
 	    Either the mention of a user, or the name of someone -- or something.
 
           </div>
@@ -1074,7 +1074,7 @@
   <p>Invite urls for the bot, and its official server.</p>
 
 
-  <div class='pre p1 fill-light mt0'>invite</div>
+  <div class='pre p1 fill-light mt0'>)invite</div>
   
   
 
@@ -1121,7 +1121,7 @@
   <p>Allows an admin or moderator of a server to kick a guild member.</p>
 
 
-  <div class='pre p1 fill-light mt0'>kick</div>
+  <div class='pre p1 fill-light mt0'>)kick [u] [r]</div>
   
   
 
@@ -1192,7 +1192,7 @@
   <p>Takes a list of "options" and returns a random item from it.</p>
 
 
-  <div class='pre p1 fill-light mt0'>pick</div>
+  <div class='pre p1 fill-light mt0'>)pick [args]</div>
   
   
 
@@ -1261,7 +1261,7 @@
   <p>The base play - Russian Roulette's shitty Russian Roulette simulator.</p>
 
 
-  <div class='pre p1 fill-light mt0'>play</div>
+  <div class='pre p1 fill-light mt0'>)play [a]</div>
   
   
 
@@ -1320,15 +1320,26 @@
   </div>
   
 
-  <p>Lets you change the prefix for your server.
-&#x26; @param {string} p The prefix input.</p>
+  <p>Lets you change the prefix for your server.</p>
 
 
-  <div class='pre p1 fill-light mt0'>prefix</div>
+  <div class='pre p1 fill-light mt0'>)prefix [p]</div>
   
   
 
-  
+ <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>args</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The new prefix.
+
+          </div>
+          
+        </div>
+      
+    </div>
   
   
   
@@ -1371,7 +1382,7 @@
   <p>Deletes messages.</p>
 
 
-  <div class='pre p1 fill-light mt0'>prune</div>
+  <div class='pre p1 fill-light mt0'>)prune [u] [a]</div>
   
   
 
@@ -1450,7 +1461,7 @@
   <p>Restarts the bot's server daemon.</p>
 
 
-  <div class='pre p1 fill-light mt0'>restart</div>
+  <div class='pre p1 fill-light mt0'>)restart [args]</div>
   
   
 
@@ -1511,7 +1522,7 @@
   <p>This command allows the bot to store role information, so whenever someone leaves and joins back they get their role back instantly. That is if this command is enabled.</p>
 
 
-  <div class='pre p1 fill-light mt0'>rolesave</div>
+  <div class='pre p1 fill-light mt0'>)rolesave [args]</div>
   
   
 
@@ -1590,7 +1601,7 @@
   <p>Lets you roll a theoretical dice with almost any number of sides you want.</p>
 
 
-  <div class='pre p1 fill-light mt0'>roll</div>
+  <div class='pre p1 fill-light mt0'>)roll [num]</div>
   
   
 
@@ -1659,7 +1670,7 @@
   <p>Just some simple rock paper scissors.</p>
 
 
-  <div class='pre p1 fill-light mt0'>rps</div>
+  <div class='pre p1 fill-light mt0'>)rps [args]</div>
   
   
 
@@ -1728,7 +1739,7 @@
   <p>Shitty "secret" commands that didn't fit the bot's shit.</p>
 
 
-  <div class='pre p1 fill-light mt0'>secrets</div>
+  <div class='pre p1 fill-light mt0'>)secrets [args]</div>
   
   
 
@@ -1790,7 +1801,7 @@
   <p>Gets the statistics from the database, for yourself or another. Maybe even the bot's stats.</p>
 
 
-  <div class='pre p1 fill-light mt0'>stats</div>
+  <div class='pre p1 fill-light mt0'>)stats [u]</div>
   
   
 
@@ -1852,7 +1863,7 @@
   <p>Allows you to suggest features for the bot.</p>
 
 
-  <div class='pre p1 fill-light mt0'>suggest</div>
+  <div class='pre p1 fill-light mt0'>)suggest [s]</div>
   
   
 
