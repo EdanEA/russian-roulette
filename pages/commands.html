@@ -13,7 +13,7 @@
     <div class='flex'>
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
-		<h3 class='mb0 no-anchor'><a href="https://edanea.github.io/russian-roulette">russian-roulette</a></h3>
+		<h3 class='mb0 no-anchor'><a href="https://edanea.github.io/russian-roulette" class=name>russian-roulette</a></h3>
           <div class='mb1'><code>1.9.0</code></div>
           <input
             placeholder='Filter'
@@ -1914,19 +1914,19 @@
   <script src='assets/site.js'></script>
 </body>
 
-<style>
+<style>	
   * {
     background-color: #000 !important;
     color: #fff !important;
   }
-  a {
+  a:not(.name) {
     color: #ff0000 !important;
-  }
-  #russian-roulette {
-    color: #E30B5D !important;
   }
   #filter-input {
     border-color: #1a1a1a;
+  }
+  .name {
+    color: #E30B5D !important;
   }
 </style>
 </html>
