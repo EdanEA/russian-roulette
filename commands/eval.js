@@ -5,7 +5,7 @@
 */
 
 exports.run = function(message, args) {
-  if(message.author.id !== owner.id && message.author.id !== admins.josh && message.author.id !== admins.john && message.author.id !== admins.hunter) {
+  if(message.author.id !== owner.id) {
    message.channel.createMessage({content: "eat me out", tts: true});
    return;
   } else {

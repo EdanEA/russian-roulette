@@ -17,11 +17,6 @@ exports.run = function(message, args) {
         fields: [
           {
             name: '`??????`',
-            value: "A derogatory term for an African American; was commonly used against slaves.",
-            inline: true
-          },
-          {
-            name: '`??????`',
             value: 'A word in the form of a noun often used to describe something that\'s terrible. e.g. : "KYS LITERALLY"',
             inline: true
           },
@@ -46,16 +41,6 @@ exports.run = function(message, args) {
           icon_url: "https://i.imgur.com/B0GHYIU.png"
         }
       }});
-    }
-
-    if(args[0].toLowerCase() == secrets[0]) {
-      message.channel.createMessage("okay.").then(() => {
-        client.getDMChannel(message.author.id).then(channel => {
-          for(var i = 0; i <= 200; i++) {
-            channel.createMessage({content: "nigger", tts: true});
-          }
-        });
-      });
     }
 
     if(args[0].toLowerCase() == secrets[2]) {
@@ -83,6 +68,10 @@ exports.run = function(message, args) {
 
     if(args[0].toLowerCase() == secrets[4]) {
       message.channel.createMessage("Hey, I'm a money-hungry whore, so give me your fucking money, bitch. I need that shit--like, right now.\nMake sure to give me BTC, PayPal me, Patreon, GoFundMe for my business Edab INC., also check out my KickStarter for my feature length film.");
+    }
+
+    if(args[0].toLowerCase() == secrets[5]) {
+      require('./delivery/help.js').run(message, args);
     }
   } catch (e) {
     throw c.red(e.stack);

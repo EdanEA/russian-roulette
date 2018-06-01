@@ -29,12 +29,12 @@ exports.run = function(message, args) {
   var baseReplies = {
     reasons: [
       "Damn, bro, their brains splattered everywhere. It was fuckin' crazy; should've been there.",
-      `Lol, ${message.author.username}'s so shit. They lost to like a ${(a * 16).toString()}% percent chance of dying. Literal garbage.`,
+      `Lol, ${message.author.username}'s so shit. They lost to like a ${(a * 16.666).toFixed(2).toString()}% percent chance of dying. Literal garbage.`,
       "I WAS CONCEIVED BY MY DISEASE",
       "D:"
     ],
     rrs: [
-      `Damn, bro, you beat the ${(a * 16).toString()}% chance that you'd get beaned.`,
+      `Damn, bro, you beat the ${(a * 16.666).toFixed(2).toString()}% chance that you'd get beaned.`,
       "Yeet, you get to survive, my guy.",
       "Fucking hell! This isn't fair. >:(((\nYou should go again...",
       "John's a nigger, lol. Btw you didn't lose."
@@ -46,12 +46,12 @@ exports.run = function(message, args) {
   var censoredReplies = {
     reasons: [
       "Damn, bro, their brains splattered everywhere. It was crazy; should've been there.",
-      `Lol, ${message.author.username}'s so traaaaaaaaaaaaash. They lost to like a ${(a * 16).toString()}% percent chance of dying. Literal garbage.`,
+      `Lol, ${message.author.username}'s so traaaaaaaaaaaaash. They lost to like a ${(a * 16.666).toFixed(2).toString()}% percent chance of dying. Literal garbage.`,
       "I WAS CONCEIVED BY MY DISEASE",
       "D:"
     ],
     rrs: [
-      `Aw yeah, you beat the ${(a * 16).toString()}% chance that you'd get beaned.`,
+      `Aw yeah, you beat the ${(a * 16.666).toFixed(2).toString()}% chance that you'd get beaned.`,
       "Yeet, you get to survive, my guy.",
       "This isn't fair. >>>:'(((\nYou should go again...",
       "John's a person of African decent, lol. Btw you didn't lose."
@@ -124,10 +124,6 @@ exports.run = function(message, args) {
     if(b === p) {
       if(guilds[message.channel.guild.id].banPlay == false || bc == false || rc == false || args[0] == 'safe') {
         message.channel.createMessage("Whoops! You totally lost, but I can't ban you. Just pretend it was blanks, I guess.");
-        sql.get(`SELECT * FROM players WHERE userID = '${id}'`).then(r => {
-          if(!r) return sql.run(`INSERT INTO players (userID, wins, loses, plays) VALUES (?, ?, ?, ?)`, [id, 0, 1, 1]);
-          else return sql.run(`UPDATE players SET plays = ${r.plays += 1}, loses = ${r.loses += 1} WHERE userID = '${id}'`);
-        });
       } else {
         message.channel.createMessage("*bang*").then(m => {
           setTimeout(() => {

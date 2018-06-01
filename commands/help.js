@@ -10,11 +10,11 @@ exports.run = function(message, args) {
       fields: [
         {
           name: '`Core Commands`',
-          value: '`play`, `forceplay`, `stats`'
+          value: '`play`, `forceplay`, `multiplay`, `stats`'
         },
         {
           name: '`Admin Commands`',
-          value: '`ban`, `kick`, `prune`, `prefix`'
+          value: '`ban`, `kick`, `prune`, `prefix`, `rolesave`, `config`'
         },
 		    {
 		      name: '`Fun Commands`',
@@ -22,7 +22,7 @@ exports.run = function(message, args) {
 		    },
         {
           name: "`Misc. Commands`",
-          value: '`coin`, `pick`, `invite`, `suggest`, `about`'
+          value: '`coin`, `pick`, `invite`, `suggest`, `about`, `info`, `guild`'
         },
         {
           name: "`Staff Commands`",
@@ -49,8 +49,7 @@ exports.run = function(message, args) {
         ]
       }});
     } catch (e) {
-      message.channel.createMessage(`\`\`\`${e}\`\`\``);
-      throw c.red(e.stack);
+      return message.channel.createMessage(`<@${message.author.id}>, that is not a command.`);
     }
   }
 };
