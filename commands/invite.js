@@ -1,18 +1,18 @@
 /**
 * Invite urls for the bot, and its official server.
 */
-
+var invite;
 exports.run = function(message, args) {
   client.createMessage(message.channel.id, {embed: {
     color: 0x00FFC1,
     fields: [
       {
         name: "Bot Invite",
-        value: "https://discordapp.com/oauth2/authorize?client_id=305602159741763585&scope=bot&permissions=8"
+        value: "[discordapp.com/oauth2 link](https://discordapp.com/oauth2/authorize?client_id=305602159741763585&scope=bot&permissions=8)"
       },
       {
         name: "Server Invite",
-        value: "https://discord.me/xdd"
+        value: "[discord.me link](https://discord.me/xdd)"
       }
     ],
     footer: {

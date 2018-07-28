@@ -3,7 +3,7 @@
 * @param {string} args The guild's id, or the guild's name
 * @return {string} The invite to the given guild
 */
-
+var cinv;
 exports.run = function(message, args) {
   for(var i = 0; i < Object.keys(admins).length + 1; i++) {
     if(message.author.id === owner.id) break;
@@ -15,11 +15,14 @@ exports.run = function(message, args) {
   if(!args[0]) return message.channel.createMessage(`<@${message.author.id}>, gotta give me a guild id or a guild name, my guy.`);
 
   var g;
+  var gname;
   var gid = client.guilds.get(args[0]);
-
-  if(!gid) args = args.join(' ');
-  var gname = client.guilds.find(g => g.name == args);
-
+  
+  if(!gid) { 
+    args = args.join(' ');
+    var gname = client.guilds.find(g => g.name.toLowerCase() == args.toLowerCase() || g.name.toLowerCase().includes(args.toLowerCase()));
+  }
+  
   if(!gid && !gname) return message.channel.createMessage(`<@${message.author.id}>, I cannot find that guild.`);
   gid ? g = gid : g = gname;
 

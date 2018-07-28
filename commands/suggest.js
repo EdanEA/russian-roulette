@@ -2,8 +2,8 @@
 * Allows you to suggest features for the bot.
 * @param {string} s The suggestion.
 */
-
-exports.run = function(message, args) {
+var suggest;
+exports.run = async function(message, args) {
   var s = args.join(' ');
 
   if(!s) return message.channel.createMessage(`Hey, bud, you gotta actually suggest something.`);
@@ -13,8 +13,8 @@ exports.run = function(message, args) {
       client.createMessage(bot.suggestchannel, {embed: {
         color: 0x551A8B,
         fields: [
-          { name: "Guild Invite, ID, and Channel ID", value: `https://discord.gg/${i.code}, ${message.channel.guild.id}, ${message.channel.id}`, inline: false },
-          { name: "Suggestor and Guild Info", value: `${message.author.username}#${message.author.discriminator}, ${message.author.id}, in ${message.channel.guild.name}, in the channel \`#${message.channel.name}\``, inline: false },
+          { name: "Guild Info", value: `Guild Name: ${message.channel.guild.name}\nGuild Invite: https://discord.gg/${i.code}\nGuild ID: ${message.channel.guild.id}\nChannel Name: ${message.channel.name}\nChannel ID:${message.channel.id}`, inline: false },
+          { name: "User Info", value: `User Tag: ${message.author.username}#${message.author.discriminator}\nUser ID: ${message.author.id}`, inline: false },
           { name: "Suggestion(s)", value: `\`\`\`${s}\`\`\``, inline: false }
         ],
         footer: {

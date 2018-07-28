@@ -2,30 +2,30 @@
 * Gives information on the bot's commands.
 * @param {string} [args = null] The name of a command, for more info on that specific command.
 */
-
+var help;
 exports.run = function(message, args) {
   if(!args[0]) {
     client.createMessage(message.channel.id, {embed: {
       color: 0xCD2626,
       fields: [
         {
-          name: '`Core Commands`',
+          name: '**Core Commands**',
           value: '`play`, `forceplay`, `multiplay`, `stats`'
         },
         {
-          name: '`Admin Commands`',
+          name: '**Admin Commands**',
           value: '`ban`, `kick`, `prune`, `prefix`, `rolesave`, `config`'
         },
 		    {
-		      name: '`Fun Commands`',
+		      name: '**Fun Commands**',
 		      value: '`secrets`, `insult`, `rps`, `coin`, `roll`'
 		    },
         {
-          name: "`Misc. Commands`",
+          name: "**Misc. Commands**",
           value: '`coin`, `pick`, `invite`, `suggest`, `about`, `info`, `guild`'
         },
         {
-          name: "`Staff Commands`",
+          name: "**Staff Commands**",
           value: '`cinv`, `eval`, `blacklist`'
         }
       ],
@@ -40,12 +40,11 @@ exports.run = function(message, args) {
 
       client.createMessage(message.channel.id, {embed: {
         color: 0xCD2626,
+        title: `${command.usage} command info`,
+        description: "To use command arguments, simply replace `[args]` with the argument(s) you choose to use.",
         fields: [
-          {
-            name: `\`${command.usage}\` command info`,
-            value: `\`\`\`Arguments:\n${command.args}\n\nDescription:\n${command.description}\`\`\``,
-            inline: false
-          }
+          { name: "Arguments", value: command.args },
+          { name: "Description", value: command.description }
         ]
       }});
     } catch (e) {

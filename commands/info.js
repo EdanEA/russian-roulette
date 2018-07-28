@@ -1,3 +1,9 @@
+/**
+* Gives info on a user.
+* @param {string} [u = null] Checks if you want to check a specific user, or yourself.
+* @return {string} Return info with a range of information for the user given.
+*/
+var info;
 exports.run = function(message, args) {
   var u = message.mentions;
 
@@ -23,7 +29,7 @@ exports.run = function(message, args) {
       roles += role + "\n"
     }
 
-    if(roles.length > 1024) roles = "There's too many roles, please get rid of some--too many and it just becomes cancerous.";
+    if(roles.length > 1024) roles = "There's too many roles, please get rid of some -- too many and you're just making an ass of yourself.";
 
     var embed = {
       author: { name: `${user.username}#${user.discriminator} (${user.id})`, icon_url: user.avatarURL },
