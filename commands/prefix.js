@@ -2,7 +2,7 @@
 * Lets you change the prefix for your server.
 & @param {string} p The prefix input.
 */
-
+var prefix;
 exports.run = function(message, args) {
   var ca = perms.checkAdmin(message);
   if(ca == false) return message.channel.createMessage("nah, you can't use this.");

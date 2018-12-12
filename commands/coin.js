@@ -1,9 +1,8 @@
-
 /**
 * Shitty coin command - lets you guess what side of a coin will land on.
 * @param {string} args Your pick of what side it will land on.
 */
-
+var coin;
 exports.run = function(message, args) {
   try {
     var sides = [ "heads", "tails" ];

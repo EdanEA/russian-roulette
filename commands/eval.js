@@ -3,7 +3,7 @@
 * @param {string} i The code to eval
 * @return {string} The output of the eval function.
 */
-
+var evaluate;
 exports.run = function(message, args) {
   if(message.author.id !== owner.id) {
    message.channel.createMessage({content: "eat me out", tts: true});

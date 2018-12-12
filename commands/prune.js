@@ -4,7 +4,7 @@
 * @param {integer} a The amount of messages to delete.
 * @return {string} A message confirming that messages were deleted.
 */
-
+var prune;
 exports.run = async function(message, args) {
   var replies;
 

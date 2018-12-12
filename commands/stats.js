@@ -1,8 +1,8 @@
 /**
 * Gets the statistics from the database, for yourself or another. Maybe even the bot's stats.
-* @param {string} [u = null] Mention of a guild member, for their own stats.
+* @param {string} [u = null] Mention of a guild member or their ID, for their own stats.
 */
-
+var stats;
 exports.run = function(message, args) {
   var u = message.mentions;
 
@@ -11,7 +11,7 @@ exports.run = function(message, args) {
     if(!args[0] && !u[0]) {
       sql.get(`SELECT * FROM players WHERE userID = '${message.author.id}'`).then(r => {
         if(!r) {
-          sql.run(`INSERT INTO players (userID, wins, loses, plays) VALUES (?, ?, ?, ?)`, [message.author.id, 0, 0, 0, 200]);
+          sql.run(`INSERT INTO players (userID, wins, loses, plays, rubles) VALUES (?, ?, ?, ?, ?)`, [message.author.id, 0, 0, 0, 200]);
           message.channel.createMessage({embed: {
             color: 0xE30B5D,
             footer: { text: `${message.author.username}'s Stats`, icon_url: message.author.avatarURL },
@@ -52,7 +52,7 @@ exports.run = function(message, args) {
       });
     }
 
-    else if(u[0].id === client.user.id) {
+    else if(args[0] == client.user.id || u[0].id == client.user.id) {
       var time = moment.duration(client.uptime, "milliseconds").format("d[d] hh[h] mm[m] ss[s]");
       var gts = client.shards.map(s => `Shard ${s.id} : ${client.guilds.filter(g => g.shard.id === s.id).length}`).join('\n\t- ');
       client.createMessage(message.channel.id, {embed: {
@@ -70,10 +70,72 @@ exports.run = function(message, args) {
       }});
     }
 
+    else if(u.length <= 0 && !client.users.get(args[0])) {
+      u = message.channel.guild.members.find(m => m.username.toLowerCase() == args.join(' ').toLowerCase() || m.nick.toLowerCase() == args.join(' ').toLowerCase() || m.username.search(args.join(' ').toLowerCase()) == 1 || m.nick.search(args.join(' ')) == 1).id;
+
+      sql.get(`SELECT * FROM players WHERE userID = '${u}'`).then(r => {
+        if(!r) {
+          sql.run('INSERT INTO players (userID, wins, loses, plays, rubles) VALUES (?, ?, ?, ?, ?)', [u, 0, 0, 0, 200]);
+            color: 0xE30B5D,
+            client.createMessage(message.channel.id, {embed: {
+            footer: { text: `${message.channel.guild.members.get(u).username}'s Stats`, icon_url: message.channel.guild.members.get(u).avatarURL },
+            thumbnail: { url: message.channel.guild.members.get(u).avatarURL },
+            fields: [
+              { name: "Wins", value: "0", inline: true },
+              { name: "Loses", value: "0", inline: true },
+              { name: "Total Plays", value: "0", inline: true }
+            ]
+          }});
+        }
+
+        client.createMessage(message.channel.id, {embed: {
+          color: 0xE30B5D,
+          footer: { text: `${message.channel.guild.members.get(u).username}'s Stats`, icon_url: message.channel.guild.members.get(u).avatarURL },
+          thumbnail: { url: message.channel.guild.members.get(u).avatarURL
+          },
+          fields: [
+            { name: "Wins", value: r.wins.toString(), inline: true },
+            { name: "Loses", value: r.loses.toString(), inline: true },
+            { name: "Total Plays", value: r.plays.toString(), inline: true }
+          ]
+        }});
+      });
+    }
+
+    else if(client.users.get(args[0])) {
+      sql.get(`SELECT * FROM players WHERE userID = '${args[0]}'`).then(r => {
+        if(!r) {
+          sql.run('INSERT INTO players (userID, wins, loses, plays, rubles) VALUES (?, ?, ?, ?, ?)', [args[0], 0, 0, 0, 200]);
+            color: 0xE30B5D,
+            client.createMessage(message.channel.id, {embed: {
+            footer: { text: `${message.channel.guild.members.get(args[0]).username}'s Stats`, icon_url: message.channel.guild.members.get(args[0]).avatarURL },
+            thumbnail: { url: message.channel.guild.members.get(args[0]).avatarURL },
+            fields: [
+              { name: "Wins", value: "0", inline: true },
+              { name: "Loses", value: "0", inline: true },
+              { name: "Total Plays", value: "0", inline: true }
+            ]
+          }});
+        }
+
+        client.createMessage(message.channel.id, {embed: {
+          color: 0xE30B5D,
+          footer: { text: `${message.channel.guild.members.get(args[0]).username}'s Stats`, icon_url: message.channel.guild.members.get(args[0]).avatarURL },
+          thumbnail: { url: message.channel.guild.members.get(args[0]).avatarURL
+          },
+          fields: [
+            { name: "Wins", value: r.wins.toString(), inline: true },
+            { name: "Loses", value: r.loses.toString(), inline: true },
+            { name: "Total Plays", value: r.plays.toString(), inline: true }
+          ]
+        }});
+      });
+    }
+
     else if(u[0]) {
       sql.get(`SELECT * FROM players WHERE userID = '${message.channel.guild.members.get(u[0].id).user.id}'`).then(r => {
         if(!r) {
-          sql.run('INSERT INTO players (userID, wins, loses, plays) VALUES (?, ?, ?, ?)', [u[0].id, 0, 0, 0]);
+          sql.run('INSERT INTO players (userID, wins, loses, plays, rubles) VALUES (?, ?, ?, ?, ?)', [u[0].id, 0, 0, 0, 200]);
           client.createMessage(message.channel.id, {embed: {
             color: 0xE30B5D,
             footer: { text: `${message.channel.guild.members.get(u[0].id).username}'s Stats`, icon_url: message.channel.guild.members.get(u[0].id).avatarURL },
@@ -107,6 +169,6 @@ exports.run = function(message, args) {
 
 exports.info = {
   usage: ")stats [args]",
-  args: "Either nothing, a mention of a user, or 'top' for the top players.",
+  args: "Either nothing, a mention of a user, a user ID, \`top\` or \`global\` for the top players, or the ID or mention of the bot for its server statistics.",
   description: "Get your stats from when you've played Russian roulette."
 };

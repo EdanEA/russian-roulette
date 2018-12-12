@@ -3,11 +3,13 @@
 * @param {integer} num The number of sides for the dice.
 * @return {string} The result of "rolling" the dice.
 */
-
+var roll;
 exports.run = function(message, args) {
   var num = parseInt(args[0]);
+  if(num > 5000) return message.channel.createMessage(`<@${message.author.id}>, sorry, fath'r. But I can't let you do that, since it sort-of crashes me sometimes. kthxbye`);
+
   if(!num && guilds[message.channel.guild.id].censor == false) return message.channel.createMessage(`<@${message.author.id}> reeeeeeeeeeeeeeeeeeeeeeeee, how many sides do ya' fuckin' want you cunnnnnnnnnt?`);
-  else if(!num && guilds[message.channel.guild.id].censor == true) return message.channel.createMessage(`<@${message.author.id}>, gotta tell me how many sides you want on this dice, my guy. Gosh darn, this is infuriating.`)
+  else if(!num && guilds[message.channel.guild.id].censor == true) return message.channel.createMessage(`<@${message.author.id}>, gotta tell me how many sides you want on this dice, my guy. Gosh darn, this is infuriating.`);
 
   var sides = [];
   for(var i = 0; i < num; i++) {

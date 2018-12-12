@@ -1,7 +1,7 @@
 /**
 * Gives a bit of information about the bot and it's developer.
 */
-
+var about;
 exports.run = function(message, args) {
   if(guilds[message.channel.guild.id].censor == false) {
     client.createMessage(message.channel.id, {embed: {
@@ -28,7 +28,7 @@ exports.run = function(message, args) {
         },
         {
           name: "Anything else?",
-          value: "Check out the new [fancy website](https://edanea.github.io), the [GitHub page](https://github.com/EdanEA/russian-roulette), or the [official server](https://discord.me/xdd), and my dev's new bot, [Cynthia](https://edanea.github.io/cynthia). I mean -- only if you want to. I don't care :'("
+          value: "Check out the new [fancy website](https://edanea.github.io/russian-roulette), the [GitHub page](https://github.com/EdanEA/russian-roulette), or the [official server](https://discord.me/xdd), and my dev's new bot, [Cynthia](https://edanea.github.io/cynthia). You could also help by donating [here](https://paypal.me/edanea).\nI mean -- only if you want to. I don't care :'("
         }
       ],
       footer: {
@@ -61,7 +61,7 @@ exports.run = function(message, args) {
         },
         {
           name: "Anything else?",
-          value: "Check out the new [fancy website](https://edanea.github.io), the [GitHub page](https://github.com/EdanEA/russian-roulette), the [official server](https://discord.me/xdd), or [Cynthia](https://edanea.github.io/cynthia), my dev's new bot. I mean -- only if you want to. I don't care :'("
+          value: "Check out the new [fancy website](https://edanea.github.io), the [GitHub page](https://github.com/EdanEA/russian-roulette), the [official server](https://discord.me/xdd), or [Cynthia](https://edanea.github.io/cynthia), my dev's new bot. You could also help by donation [here](https://www.paypal.me/edanea).\nI mean -- only if you want to. I don't care :'("
         }
       ],
       footer: {

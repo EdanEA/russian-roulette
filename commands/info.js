@@ -23,7 +23,7 @@ exports.run = function(message, args) {
     else if(message.channel.permissionsOf(user.id).has("banMembers") && !message.channel.permissionsOf(user.id).has("kickMembers")) admin = true;
     else if(message.channel.permissionsOf(user.id).has("administrator" || message.channel.guild.ownerID == user.id) || message.channel.guild.ownerID == user.id) admin = true;
 
-    if(!message.channel.guild.members.get(user.id).roles[0]) roles += "`@everyone`"
+    if(!message.channel.guild.members.get(user.id).roles[0]) roles += "`@everyone`";
     for(var i = 0; i < message.channel.guild.members.get(user.id).roles.length; i++) {
       var role = `\`${message.channel.guild.roles.get(message.channel.guild.members.get(user.id).roles[i]).name}\``
       roles += role + "\n"

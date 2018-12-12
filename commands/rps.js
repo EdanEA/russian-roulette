@@ -3,7 +3,7 @@
 * @param {string} args What you will be using -- ie "rock," "paper," or "scissors."
 * @returns {string} The result of the game.
 */
-
+var rps;
 exports.run = function(message, args) {
   var replies;
 
@@ -45,7 +45,7 @@ exports.run = function(message, args) {
       return message.channel.createMessage(replies.draw);
     } else if(answer == "rock") {
       if(choice == "paper") return message.channel.createMessage(`<@${message.author.id}>, wowoowwoowwowowowowoowowowow\nThe bot won with paper, you garbage.`);
-      else if(choice == "scissors") return message.channel.createMessage(replies.rockWin)
+      else if(choice == "scissors") return message.channel.createMessage(replies.rockWin);
     } else if(answer == "paper") {
       if(choice == "scissors") return message.channel.createMessage(replies.paperLose);
       else if(choice == "rock") return message.channel.createMessage(replies.paperWin);

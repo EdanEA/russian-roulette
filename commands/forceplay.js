@@ -2,7 +2,7 @@
 * Allows an admin to force a guild member to play Russian roulette.
 * @param {string} u Mention of said guild member
 */
-
+var forceplay;
 exports.run = function(message, args) {
   var replies;
 
@@ -29,7 +29,7 @@ exports.run = function(message, args) {
   if(ca === false) return message.channel.createMessage(`<@${message.author.id}>, nope, can't use this, bud.`);
 
   var cp = perms.compare(message.member, message.channel.guild.members.get(u[0].id));
-  if(cp === false) return message.channel.createMessage(`<@${message.author.id}>, nope, can't use this on _them_, cuck-boi.`)
+  if(cp === false) return message.channel.createMessage(`<@${message.author.id}>, nope, can't use this on _them_, cuck-boi.`);
 
   try {
     var b = Math.floor(Math.random() * 5);

@@ -2,9 +2,9 @@
 * The base play - Russian Roulette's shitty Russian Roulette simulator.
 * @param {number} [a = 1] The amount of "bullets" to be used whilst playing.
 */
-
+var play;
 const sql = require('sqlite');
-sql.open('./stats.sqlite');
+sql.open('./storage/stats.sqlite');
 sql.run('CREATE TABLE IF NOT EXISTS players (userID, wins, loses, plays)');
 
 exports.run = function(message, args) {
@@ -21,6 +21,7 @@ exports.run = function(message, args) {
   var pm = message.member;
   var bc = perms.checkBotAdmin(message);
   var rc = perms.compare(bm, pm);
+  var comp = perms.compare(message.member, message.channel.guild.members.get(client.user.id))
 
   if(!a) var a = 1;
 
@@ -41,7 +42,7 @@ exports.run = function(message, args) {
     ],
     tooHigh: `<@${id}>, damn, bro, that's too high, man. You don't wanna fucking die, do you?`,
     tooLow: `<@${id}>, you can't put less than one bullet, pussy-boi.`
-  }
+  };
 
   var censoredReplies = {
     reasons: [
@@ -58,7 +59,7 @@ exports.run = function(message, args) {
     ],
     tooHigh: `<@${id}>, that's too high, man. If ya wanna kill yourself, this ain't the way, boi-o.`,
     tooLow: `<@${id}>, c'mon, don't be like that -- trying to put nothing in the virtual gun. swmh (shaking with my hand)`
-  }
+  };
 
   guilds[message.channel.guild.id].censor == true ? replies = censoredReplies : replies = baseReplies;
 
@@ -99,14 +100,23 @@ exports.run = function(message, args) {
         break;
       case 4:
         var b0 = Math.floor(Math.random() * 5), b1 = Math.floor(Math.random() * 5), b2 = Math.floor(Math.random() * 5), b3 = Math.floor(Math.random() * 5);
-        var b = [b0, b1, b2, b3]
+        var b = [b0, b1, b2, b3];
         break;
       case 5:
         var b0 = Math.floor(Math.random() * 5), b1 = Math.floor(Math.random() * 5), b2 = Math.floor(Math.random() * 5), b3 = Math.floor(Math.random() * 5), b4 = Math.floor(Math.random() * 5);
         var b = [b0, b1, b2, b3, b4];
         break;
+      case 6:
+        if(!users[message.author.id] || !users[message.author.id].ownsGun) return message.channel.createMessage(`<@${message.author.id}>, sorry, baby. But if you wanna use this, you gotta go buy a gun from the shop, mann.`);
+        if(comp == false) {
+          client.banGuildMember(message.channel.guild.id, message.author.id, 0, "Damn, that's fucked, man.");
+          return message.channel.createMessage(`Guess they really wanted to die.`);
+        } else {
+          return message.channel.createMessage(`Hecc, you're heccin' immortal, man.`);
+        }
+      break;
       default:
-        if(a > 5)
+        if(a > 6)
           return message.channel.createMessage(replies.tooHigh);
         else if(a < 1)
           return message.channel.createMessage(replies.tooLow);
@@ -136,7 +146,7 @@ exports.run = function(message, args) {
                   client.getDMChannel(id).then((channel) => {
                     channel.createMessage(`You were unbanned, I guess. https://discord.gg/${invite.code}`);
                     sql.get(`SELECT * FROM players WHERE userID = '${id}'`).then(r => {
-                      if(!r) return sql.run(`INSERT INTO players (userID, wins, loses, plays) VALUES (?, ?, ?, ?)`, [id, 0, 1, 1]);
+                      if(!r) return sql.run(`INSERT INTO players (userID, wins, loses, plays, rubles) VALUES (?, ?, ?, ?, ?)`, [id, 0, 1, 1, 200]);
                       else return sql.run(`UPDATE players SET plays = ${r.plays += 1}, loses = ${r.loses += 1} WHERE userID = '${id}'`);
                     });
                   });
@@ -148,11 +158,18 @@ exports.run = function(message, args) {
       }
     } else {
       message.channel.createMessage("*click*").then(m => {
+        if(args[0] == "safe" || guilds[message.channel.guild.id].banPlay == false) return m.edit(rr);
         setTimeout(() => {
-          m.edit(rr);
           sql.get(`SELECT * FROM players WHERE userID = '${id}'`).then(r => {
-            if(!r) return sql.run(`INSERT INTO players (userID, wins, loses, plays) VALUES (?, ?, ?, ?)`, [id, 1, 0, 1]);
-            else return sql.run(`UPDATE players SET plays = ${r.plays += 1}, wins = ${r.wins += 1} WHERE userID = '${id}'`);
+
+            var xd = 0;
+            if(Math.floor(Math.random() * 5) == 0) {
+              m.edit(`${rr}\n\nBy the way, you won ${1 * a} rubles, baby.`);
+              xd = 1 * a;
+            } else m.edit(rr);
+
+            if(!r) sql.run(`INSERT INTO players (userID, wins, loses, plays, rubles) VALUES (?, ?, ?, ?, ?)`, [id, 1, 0, 1, (200 + xd)]);
+            else sql.run(`UPDATE players SET plays = ${r.plays += 1}, wins = ${r.wins += 1}, rubles = ${r.rubles += xd}  WHERE userID = '${id}'`);
           });
         }, 3500);
       });

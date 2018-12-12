@@ -1,3 +1,10 @@
+/**
+* This command allows the bot to store role information, so whenever someone leaves and joins back they get their role back instantly. That is if this command is enabled.
+* @param {string} args[0] This can either be "help" for some very in-depth information on what the command does, "start" to have the bot start storing roles, or "update" for it to update its stored roles.
+* @param {string} check If you choose "start" for the first parameter, the bot will ask if you for sure want to enable it, and then you can decline or confirm.
+* @return {string} A help embed, or a confirmation of it storing roles.
+*/
+
 exports.run = async function(message, args) {
   if(!args[0]) return message.channel.createMessage(`${guilds[message.channel.id].censor == true ? `<@${message.author.id}>, rawr, daddy, you gotta give me 'em arguments, bud.` : `<@${message.author.id}>, god damn you. I've been doing this for almost a year, and I just can't get any god damned arguments, can I?`}`);
   if(perms.checkAdmin(message) == false) return message.channel.createMessage(`<@${message.author.id}>, oh no, the baby boi can't use the big boi command! Get outta here, y'loser. smh`);
@@ -18,14 +25,14 @@ exports.run = async function(message, args) {
       }
     });
 
-    guilds[guild.id].roleSave = users;
+    rolesave[guild.id] = users;
     guilds[guild.id].roleSaveActive = true;
     return true;
   }
 
   switch(args[0].toLowerCase()) {
     case "help":
-      return message.channel.createMessage({embed: {
+      message.channel.createMessage({embed: {
         color: 0xff0000,
         fields: [
           { name: "`start` argument", value: "```)rolesave start```Doing this command will ask you to confirm you want to enable this, and if you confirm will store the data of all user's roles in the guild. Do mind this is static, meaning it will not change unless done manually." },
@@ -35,7 +42,7 @@ exports.run = async function(message, args) {
         title: "RoleSave Info",
         description: "The `rolesave` command is used to save the roles which users have in this guild--by default this is not enabled. Below is help on using it. By the way, I need to be higher than the roles I'll be storing if you want them to be added back when a member joins back.\nDisclaimer: By enabling the `rolesave` command, you hereby grant the bot to store data for your guild; if disabled it will no longer hold this data.",
       }});
-    break;
+    return;
 
     case "start":
       if(guilds[message.channel.guild.id].roleSaveActive == true) return message.channel.createMessage(`<@${message.author.id}>, y'already have this enabled, boi-o.`);
@@ -56,7 +63,7 @@ exports.run = async function(message, args) {
       if(!check) return message.channel.createMessage(`<@${message.author.id}>, nothing or an invalid input was given.`);
 
       guilds[message.channel.guild.id].roleSaveActive = false;
-      guilds[message.channel.guild.id].roleSave = null;
+      rolesave[message.channel.guild.id] = [];
       return message.channel.createMessage(`<@${message.author.id}>, I've now stopped storing the roles of this server.`);
     break;
 

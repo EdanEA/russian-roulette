@@ -2,7 +2,7 @@
 * Shitty "secret" commands that didn't fit the bot's shit.
 * @param {string} [args = "help"] The name of the supposed secret command.
 */
-
+var secrets;
 exports.run = function(message, args) {
   var secrets = k.secrets; // no reason really, I just wanna
   var h;
@@ -17,27 +17,27 @@ exports.run = function(message, args) {
         fields: [
           {
             name: '`??????`',
-            value: 'A word in the form of a noun often used to describe something that\'s terrible. e.g. : "KYS LITERALLY"',
-            inline: true
+            value: 'A word in the form of a noun often used to describe something that\'s terrible. e.g. : "KYS LITERALLY"'
           },
           {
             name: '`????`',
-            value: 'http://i.imgur.com/Kub5vQW.jpg',
-            inline: true
+            value: 'http://i.imgur.com/Kub5vQW.jpg'
           },
           {
             name: '`??`',
-            value: "A terrible term / icon, constantly used in Minecraft fanbases and similar communities.",
-            inline: true
+            value: "A terrible term / icon, constantly used in Minecraft fanbases and similar communities."
           },
           {
             name: '`??????`',
-            value: "Hey, I'm a money-hungry whore. Give me your money, bitch.",
-            inline: true
+            value: "Hey, I'm a money-hungry whore. Give me your money, bitch."
+          },
+          {
+            name: '`????????`',
+            value: "The best game in existence. It is commonly know as a \"battle royale,\" aka that thing that Minecraft servers did before everyone else. smh"
           }
         ],
         footer: {
-          text: "Reee, I'm triggered af, fam squad",
+          text: "Reee, I'm triggered af, fam squadhttps://discord.me/xdd",
           icon_url: "https://i.imgur.com/B0GHYIU.png"
         }
       }});
@@ -67,11 +67,11 @@ exports.run = function(message, args) {
     }
 
     if(args[0].toLowerCase() == secrets[4]) {
-      message.channel.createMessage("Hey, I'm a money-hungry whore, so give me your fucking money, bitch. I need that shit--like, right now.\nMake sure to give me BTC, PayPal me, Patreon, GoFundMe for my business Edab INC., also check out my KickStarter for my feature length film.");
+      message.channel.createMessage("Hey, I'm a money-hungry whore, so give me your fucking money, bitch. I need that shit--like, right now. Make sure to give me BTC, PayPal me, Patreon, GoFundMe for my business Edab INC., also check out my KickStarter for my feature length film.\n\nBut actually, please help by donating. I'm dying out here.\nhttps://www.paypal.me/edanea");
     }
 
     if(args[0].toLowerCase() == secrets[5]) {
-      require('./delivery/help.js').run(message, args);
+      return message.channel.createMessage("Did y'all know that Edab INC. is now partnering YouTube channels? That's right, and our first completely real partner is `mapierce197026`. A great Fortnite YouTuber; the game which the Edab INC. CLO, Joshua Z. C., called `the most amazing gaming experience in the entire length of gaming history.`\n\nHere's the channel: https://www.youtube.com/channel/UC9xZtAEHjMU-uwzGxrSmjdQ\nMake sure to tell 'em Edan sent y'.");
     }
   } catch (e) {
     throw c.red(e.stack);

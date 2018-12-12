@@ -64,7 +64,7 @@ exports.run = function(message, args) {
       message.channel.createMessage({embed: e});
     }
   } else {
-    return message.channel.createMessage(`<@${message.author.id}>, damn, you broke it. How could you, you filthy degenerate?`);
+    return message.channel.createMessage(`<@${message.author.id}>, damn, couldn't find that one. Well, it's either that, or y' broke it -- if that is so, good job, I applaud you.`);
   }
 };
 

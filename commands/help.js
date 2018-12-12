@@ -10,23 +10,23 @@ exports.run = function(message, args) {
       fields: [
         {
           name: '**Core Commands**',
-          value: '`play`, `forceplay`, `multiplay`, `stats`'
+          value: '`play`, `forceplay`, `multiplay`, `stats`, `store`, `bank`, `profile`'
         },
         {
           name: '**Admin Commands**',
           value: '`ban`, `kick`, `prune`, `prefix`, `rolesave`, `config`'
         },
-		    {
-		      name: '**Fun Commands**',
-		      value: '`secrets`, `insult`, `rps`, `coin`, `roll`'
-		    },
+        {
+          name: '**Fun Commands**',
+          value: '`secrets`, `insult`, `rps`, `coin`, `roll`, `shoot`, `suicide`'
+	},
         {
           name: "**Misc. Commands**",
-          value: '`coin`, `pick`, `invite`, `suggest`, `about`, `info`, `guild`'
+          value: '`pick`, `invite`, `suggest`, `about`, `info`, `guild`, `inv`'
         },
         {
           name: "**Staff Commands**",
-          value: '`cinv`, `eval`, `blacklist`'
+          value: '`cinv`, `eval`, `blacklist`, `restart`'
         }
       ],
       footer: {
@@ -57,4 +57,4 @@ exports.info = {
   usage: ")help [args]",
   args: "[command name]",
   description: "It's a help command, no arguments for a list of the commands, or the name of a command for more info on it specifically."
-}
+};
