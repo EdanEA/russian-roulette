@@ -2,21 +2,10 @@
 [![Discord Server](https://discordapp.com/api/guilds/380310916341956610/embed.png)](https://discord.me/xdd)
 # Russian Roulette
 ## What is this?
-To quote my favorite show:<br>1: "What are you other than a shitty bot?"<br>1: "That's all you know. Y'know?"<br><br>rr: "Damn. You're right, man. I suppose I'm but a shitty bot."
+Russian Roulette is a Discord bot, that is meant for, well, Russian Roulette--among other things. What are these aforementioned, "other things," you ask? Other games, some badly written moderation commands, y'know--and that's pretty much it. 
 
 ## Can I help?
-I guess.<br>Just--please--don't rape me, I'm but a little boy. D:
-
-## Anywhere the bot's on?
-It's here (fancy widget):
-
-
-
-[![discordbots widget](https://discordbots.org/api/widget/305602159741763585.png)](https://discordbots.org/bot/305602159741763585)
-
-[And here](https://bots.discord.pw/bots/305602159741763585)
-
-[Or just the OAuth link](https://discordapp.com/oauth2/authorize?client_id=305602159741763585&scope=bot&permissions=8)
+Hahaha, no.
 
 ## Anything else?
 No, leave me alone.
